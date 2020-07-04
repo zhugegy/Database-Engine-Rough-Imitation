@@ -19,9 +19,9 @@ public:
 #define COMMAND_LINE_FORMAT_RESTRICTION "%2047[^\n]s"
 #define OUTPUT_BUFFER_LENGTH 2048
 
-#define INTERFACE_WELCOME_INFO "欢迎使用！输入指令-h查看帮助。\r\n\r\n"
-#define INTERFACE_INPUT_ERROR_INFO "指令格式错误。输入指令-h查看帮助。\r\n\r\n"
-#define INTERFACE_PROCESS_ERROR_INFO "指令执行错误。输入指令-h查看帮助。\r\n\r\n"
+#define INTERFACE_WELCOME_INFO "欢迎使用！请输入指令。\r\n\r\n"
+#define INTERFACE_INPUT_ERROR_INFO "指令格式错误。\r\n\r\n"
+#define INTERFACE_PROCESS_ERROR_INFO "指令执行错误。\r\n\r\n"
 #define INTERFACE_LIST_ERROR_INFO "没有符合查询条件的结果。\r\n\r\n"
 #define INTERFACE_LIST_SUCCESS_INFO "查询成功结束。\r\n\r\n"
 #define INTERFACE_ADD_SUCCESS_INFO "添加成功。\r\n\r\n"
