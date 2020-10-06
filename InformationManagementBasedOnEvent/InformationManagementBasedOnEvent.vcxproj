@@ -29,7 +29,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -86,11 +86,11 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_GUI_SDK32;WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;_0CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -160,6 +160,8 @@
     <ClInclude Include="GYSingleInstanceMacro.h" />
     <ClInclude Include="GYString.h" />
     <ClInclude Include="InformationManager.h" />
+    <ClInclude Include="ManagementWindow.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ShellForUsingPtrInTree.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Student.h" />
@@ -174,6 +176,7 @@
     <ClCompile Include="GYString.cpp" />
     <ClCompile Include="InformationManagementBasedOnEvent.cpp" />
     <ClCompile Include="InformationManager.cpp" />
+    <ClCompile Include="ManagementWindow.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -181,6 +184,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Student.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="InformationManagementBasedOnEvent.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

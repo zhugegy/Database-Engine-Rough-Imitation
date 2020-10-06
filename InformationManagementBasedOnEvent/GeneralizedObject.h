@@ -21,6 +21,7 @@ public:
   bool set_name(CGYString * pStrName);
   int get_ID();
   int set_ID(int nID);
+  int set_RosterOffset(long lOffet);
   char get_is_valid();
   bool set_is_valid(char chStatus);
   bool add_event(int event_id);

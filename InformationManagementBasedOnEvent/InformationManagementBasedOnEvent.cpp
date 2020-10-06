@@ -11,20 +11,47 @@
 #include "EventFYJC.h"
 #include <stdio.h>
 
+#include <windows.h>
+#include "resource.h"
+#include "ManagementWindow.h"
+
 CGYSingleInstanceDedicatedClass do_not_use_created_only_for_single_instance;
 
+#if defined(_GUI_SDK32)
+// GUI SDK32 programming
+#elif defined(_CONSOLE)
+// console programming (default)
+#endif
 
-int main()
+#if defined(_GUI_SDK32)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
+  int iCmdShow)
 {
   srand((unsigned int)time(0));
 
-  CInformationManager *pInfoManager = GET_SINGLE(CInformationManager)
+  CInformationManager* pInfoManager = GET_SINGLE(CInformationManager);
   pInfoManager->load_info();
   pInfoManager->load_static_serials();
-  pInfoManager->main_loop();
+
+  DialogBox(hInstance, MAKEINTRESOURCE(IDD_DIALOG_MAIN), NULL, MainWindowProc);
 
   return 0;
 }
+#elif defined(_CONSOLE)
+int main()
+{
+    srand((unsigned int)time(0));
+
+    CInformationManager* pInfoManager = GET_SINGLE(CInformationManager);
+    pInfoManager->load_info();
+    pInfoManager->load_static_serials();
+    pInfoManager->main_loop();
+
+    return 0;
+}
+#endif
+
+
 
 /*全清空再全部写入的方法，留做备份。*/
 /*

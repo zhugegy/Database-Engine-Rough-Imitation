@@ -176,6 +176,12 @@ int CGeneralizedObject::set_ID(int nID)
   return 0;
 }
 
+int CGeneralizedObject::set_RosterOffset(long lOffset)
+{
+  m_lOffsetInRoster = lOffset;
+  return 0;
+}
+
 
 int CGeneralizedObject::say_my_basic_information(char * pStrBuffer)
 {
@@ -375,6 +381,8 @@ bool CGeneralizedObject::when_being_listed(CGYString * pStrOutputBuffer,
 {
   if (m_chIsValid != 'T')
   {
+    *pStrOutputBuffer += INTERFACE_LIST_ERROR_INFO_DELETED;
+    //append_output_buffer(INTERFACE_LIST_ERROR_INFO);
     return false;
   }
 
@@ -441,12 +449,14 @@ int CGeneralizedObject::init_load_file_data_to_memory(
 
   while (lCurrentRosterOffset < lRosterFileSize)
   {
+    char chIsValid = 'T';
     pobjFileOperatorRoster->map_file_to_memory(&pchRosterBuffer, lCurrentRosterOffset, 16, false);
 
     if (pchRosterBuffer[0] == 'F')
     {
-      lCurrentRosterOffset += 16;
-      continue;
+      /*lCurrentRosterOffset += 16;
+      continue;*/
+      chIsValid = 'F';
     }
 
     for (int i = 0; i < 8; i++)
@@ -479,7 +489,7 @@ int CGeneralizedObject::init_load_file_data_to_memory(
 
     CGYString::split_string_into_dynamic_array(pchDataBuffer, daryDataBuffer, '#');
 
-    pInfoManager->cmd_a_special_edition_for_loading_from_files(eName, daryDataBuffer);
+    pInfoManager->cmd_a_special_edition_for_loading_from_files(eName, daryDataBuffer, lCurrentRosterOffset - 16, chIsValid);
   }
   return 0;
 }

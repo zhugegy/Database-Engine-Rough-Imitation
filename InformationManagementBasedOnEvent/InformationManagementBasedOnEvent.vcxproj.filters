@@ -75,6 +75,12 @@
     <ClInclude Include="EventFYJC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagementWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -107,5 +113,13 @@
     <ClCompile Include="EventFYJC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ManagementWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="InformationManagementBasedOnEvent.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

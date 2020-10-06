@@ -9,6 +9,8 @@
 #include "GYFileOperator.h"
 #include "GYHashTable.h"
 
+#include <windows.h>
+
 class CGeneralizedObject;
 //单例类
 class CInformationManager
@@ -23,7 +25,8 @@ public:
 #define INTERFACE_INPUT_ERROR_INFO "指令格式错误。\r\n\r\n"
 #define INTERFACE_PROCESS_ERROR_INFO "指令执行错误。\r\n\r\n"
 #define INTERFACE_LIST_ERROR_INFO "没有符合查询条件的结果。\r\n\r\n"
-#define INTERFACE_LIST_SUCCESS_INFO "查询成功结束。\r\n\r\n"
+#define INTERFACE_LIST_ERROR_INFO_DELETED "没有符合查询条件的结果（此条目已删除）。\r\n\r\n"
+#define INTERFACE_LIST_SUCCESS_INFO "查询结束。\r\n\r\n"
 #define INTERFACE_ADD_SUCCESS_INFO "添加成功。\r\n\r\n"
 #define INTERFACE_DELETE_ERROR_INFO "没有符合删除条件的结果。\r\n\r\n"
 #define INTERFACE_DELETE_SUCCESS_INFO "删除成功。\r\n\r\n"
@@ -86,11 +89,15 @@ private:
 
 public:
   int main_loop();
+
+  // made the two functions below public because of GUI_SDK, was previously private
+  bool parser_user_command();
+  bool process_user_command();
+
 private:
   int get_user_command();
-  bool parser_user_command();
   int post_posses_of_char_01(char * pszSubCmd);
-  bool process_user_command();
+  
   int cmd_a(char chOperation, CGYString * cmd1);
   int remove_cmd_quoters(CGYString * pStrCmd);
   int append_output_buffer(const char * pStrBuffer);
@@ -107,7 +114,7 @@ private:
 public:
   CGeneralizedObject * query_event(int nIndex);
   bool cmd_a_special_edition_for_loading_from_files(int eName,
-    CGYDynamicArray<CGYString *> & objStorageArray);
+    CGYDynamicArray<CGYString *> & objStorageArray, long lOffsetInRoster, char cIsValid);
   CGYString * get_name_via_ID(eDataStructureName eName, int nID);
   bool load_static_serials();
 
@@ -117,5 +124,11 @@ private:
   
 public:
   int load_info();
+
+//GUI_SDK
+public:
+  int get_user_command(LPTSTR szCmd);
+  int flush_output_buffer();
+  LPTSTR get_output_buffer();
 };
 

@@ -36,7 +36,13 @@ int CInformationManager::init()
   objTemplateForQuery.m_pContentPtr = new CGeneralizedObject(0, NULL);
 
   //显示欢迎信息
+  #if defined(_GUI_SDK32)
+  // GUI SDK32 programming
+  //MessageBox(NULL, (LPCTSTR)*m_strOutputBuffer, TEXT("欢迎"), NULL);
+  #elif defined(_CONSOLE)
   printf(*m_strOutputBuffer);
+  #endif
+  
   
   return 0;
 }
@@ -92,7 +98,6 @@ int CInformationManager::main_loop()
     }
 
     //3. 处理指令
-    m_strOutputBuffer = "";
     if (process_user_command() == false)
     {
       m_strOutputBuffer = INTERFACE_PROCESS_ERROR_INFO;
@@ -119,6 +124,23 @@ int CInformationManager::get_user_command()
   return 0;
 }
 
+int CInformationManager::get_user_command(LPTSTR szCmd)
+{
+  strcpy(m_chStrCommand, szCmd);
+
+  return 0;
+}
+
+int CInformationManager::flush_output_buffer()
+{
+  m_strOutputBuffer = "";
+  return  0;
+}
+
+LPTSTR CInformationManager::get_output_buffer()
+{
+  return (LPTSTR)*m_strOutputBuffer;
+}
 
 bool CInformationManager::parser_user_command()
 {
@@ -258,6 +280,7 @@ int CInformationManager::post_posses_of_char_01(char * pszSubCmd)
 
 bool CInformationManager::process_user_command()
 {
+  m_strOutputBuffer = "";
   char chOperation = *((**(m_daryPstrCommands[0])) + 1);
   bool bIsOperationASuccess = false;
 
@@ -826,7 +849,7 @@ bool CInformationManager::cmd_z(int cmd1, int cmd2)
 
 
 bool CInformationManager::cmd_a_special_edition_for_loading_from_files(
-  int eName, CGYDynamicArray<CGYString *> & objStorageArray)
+  int eName, CGYDynamicArray<CGYString *> & objStorageArray, long lOffsetInRoster, char cIsValid)
 {
   CGYObjFactory<CGYString> *pStringFactory = GET_SINGLE(
     CGYObjFactory<CGYString>);
@@ -846,6 +869,8 @@ bool CInformationManager::cmd_a_special_edition_for_loading_from_files(
   case CInformationManager::STUDENT_DATA:
     pStudentTmp = new CStudent(pStrTmp);
     pStudentTmp->set_ID(nID);
+    pStudentTmp->set_RosterOffset(lOffsetInRoster);
+    pStudentTmp->set_is_valid(cIsValid);
 
     pStrTmp = pStringFactory->get_an_object();
     *pStrTmp = **(objStorageArray[2]);
@@ -858,6 +883,8 @@ bool CInformationManager::cmd_a_special_edition_for_loading_from_files(
   case CInformationManager::COURSE_DATA:
     pCourseTmp = new CCourse(pStrTmp);
     pCourseTmp->set_ID(nID);
+    pCourseTmp->set_RosterOffset(lOffsetInRoster);
+    pCourseTmp->set_is_valid(cIsValid);
 
     pGeneralizedObj = pCourseTmp;
     add_into_data_storage(COURSE_DATA, pGeneralizedObj);
@@ -865,6 +892,8 @@ bool CInformationManager::cmd_a_special_edition_for_loading_from_files(
   case CInformationManager::EVENTFYJC_DATA:
     pEventFYJC = new CEventFYJC(pStrTmp);
     pEventFYJC->set_ID(nID);
+    pEventFYJC->set_RosterOffset(lOffsetInRoster);
+    pEventFYJC->set_is_valid(cIsValid);
 
     pGeneralizedObj = pEventFYJC;
     add_into_data_storage(EVENTFYJC_DATA, pGeneralizedObj);
@@ -987,12 +1016,14 @@ int CInformationManager::load_info()
 
   while (lCurrentRosterOffset < lRosterFileSize)
   {
+    char chIsValid = 'T';
     pRoster->map_file_to_memory(&pchRosterBuffer, lCurrentRosterOffset, 16, false);
 
     if (pchRosterBuffer[0] == 'F')
     {
-      lCurrentRosterOffset += 16;
-      continue;
+      /*lCurrentRosterOffset += 16;
+      continue;*/
+      chIsValid = 'F';
     }
 
     chTmp = pchRosterBuffer[9];
@@ -1031,7 +1062,7 @@ int CInformationManager::load_info()
 
     CGYString::split_string_into_dynamic_array(pchDataBuffer, daryDataBuffer, '#');
 
-    cmd_a_special_edition_for_loading_from_files(STUDENT_DATA, daryDataBuffer);
+    cmd_a_special_edition_for_loading_from_files(STUDENT_DATA, daryDataBuffer, lCurrentRosterOffset - 16, chIsValid);
   }
 
 
@@ -1041,12 +1072,14 @@ int CInformationManager::load_info()
   lCurrentRosterOffset = 0;
   while (lCurrentRosterOffset < lRosterFileSize)
   {
+    char chIsValid = 'T';
     pRoster->map_file_to_memory(&pchRosterBuffer, lCurrentRosterOffset, 16, false);
 
     if (pchRosterBuffer[0] == 'F')
     {
-      lCurrentRosterOffset += 16;
-      continue;
+      /*lCurrentRosterOffset += 16;
+      continue;*/
+      chIsValid = 'F';
     }
 
     chTmp = pchRosterBuffer[9];
@@ -1085,7 +1118,7 @@ int CInformationManager::load_info()
 
     CGYString::split_string_into_dynamic_array(pchDataBuffer, daryDataBuffer, '#');
 
-    cmd_a_special_edition_for_loading_from_files(COURSE_DATA, daryDataBuffer);
+    cmd_a_special_edition_for_loading_from_files(COURSE_DATA, daryDataBuffer, lCurrentRosterOffset - 16, chIsValid);
   }
 
   pRoster = new CGYFileOperator("data_files\\eventFYJC\\roster\\roster.txt");
@@ -1094,12 +1127,14 @@ int CInformationManager::load_info()
   lCurrentRosterOffset = 0;
   while (lCurrentRosterOffset < lRosterFileSize)
   {
+    char chIsValid = 'T';
     pRoster->map_file_to_memory(&pchRosterBuffer, lCurrentRosterOffset, 16, false);
 
     if (pchRosterBuffer[0] == 'F')
     {
-      lCurrentRosterOffset += 16;
-      continue;
+      /*lCurrentRosterOffset += 16;
+      continue;*/
+      chIsValid = 'F';
     }
 
     chTmp = pchRosterBuffer[9];
@@ -1138,7 +1173,7 @@ int CInformationManager::load_info()
 
     CGYString::split_string_into_dynamic_array2(pchDataBuffer, daryDataBuffer, '#');
 
-    cmd_a_special_edition_for_loading_from_files(EVENTFYJC_DATA, daryDataBuffer);
+    cmd_a_special_edition_for_loading_from_files(EVENTFYJC_DATA, daryDataBuffer, lCurrentRosterOffset - 16, chIsValid);
   }
 
   return 0;

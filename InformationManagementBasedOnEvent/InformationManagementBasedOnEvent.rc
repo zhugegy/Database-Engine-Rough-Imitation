@@ -1,0 +1,151 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_NEUTRAL
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_MAIN DIALOGEX 0, 0, 485, 447
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "学生信息管理系统SDK"
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "执行指令",IDC_BUTTON_CONSOLE,179,312,60,16
+    EDITTEXT        IDC_EDIT_CONSOLE_OUTPUT,14,329,460,104,ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL
+    EDITTEXT        IDC_EDIT_CONSOLE_INPUT,14,313,164,14,ES_AUTOHSCROLL
+    CONTROL         "",IDC_LIST_STUDENT,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,10,16,226,264
+    GROUPBOX        "控制台",IDC_STATIC,7,303,470,137
+    PUSHBUTTON      "|<<",IDC_BUTTON_STUDENT_LIST_FIRST_PAGE,10,283,29,14
+    GROUPBOX        "学生信息",IDC_STATIC,7,7,232,293
+    PUSHBUTTON      "<",IDC_BUTTON_STUDENT_LIST_PREVIOUS_PAGE,49,283,29,14
+    PUSHBUTTON      "跳转",IDC_BUTTON_STUDENT_LIST_GO_PAGE,127,283,29,14
+    PUSHBUTTON      ">",IDC_BUTTON_STUDENT_LIST_NEXT_PAGE,166,283,29,14
+    PUSHBUTTON      ">>|",IDC_BUTTON_STUDENT_LIST_LAST_PAGE,205,283,29,14
+    GROUPBOX        "课程信息",IDC_STATIC,253,7,224,115
+    CONTROL         "",IDC_LIST_COURSE,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,255,17,218,83
+    PUSHBUTTON      "|<<",IDC_BUTTON_COURSE_LIST_FIRST_PAGE,255,105,29,14
+    PUSHBUTTON      "<",IDC_BUTTON_COURSE_LIST_PREVIOUS_PAGE,294,105,29,14
+    PUSHBUTTON      "跳转",IDC_BUTTON_COURSE_LIST_GO_PAGE,369,105,29,14
+    PUSHBUTTON      ">",IDC_BUTTON_COURSE_LIST_NEXT_PAGE,407,105,29,14
+    PUSHBUTTON      ">>|",IDC_BUTTON_COURSE_LIST_LAST_PAGE,444,105,29,14
+    CONTROL         "学生",IDC_RADIO_STUDENT,"Button",BS_AUTORADIOBUTTON,300,132,32,10
+    CONTROL         "课程",IDC_RADIO_COURSE,"Button",BS_AUTORADIOBUTTON,332,132,32,10
+    LTEXT           "操作目标：",IDC_STATIC,258,132,41,8
+    PUSHBUTTON      "增加5个随机项",IDC_BUTTON_FUN_ADD_RANDOM,257,147,114,14
+    PUSHBUTTON      "设置名称并增加",IDC_BUTTON_FUN_ADD_WITH_NAME,257,161,114,14
+    EDITTEXT        IDC_EDIT_FUN_ADD_WITH_NAME,373,161,99,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "删除当前所选项",IDC_BUTTON_FUN_DELETE_CURRENT_SELECTION,257,184,114,14
+    PUSHBUTTON      "修改当前所选项的名称",IDC_BUTTON_FUN_MODIFY_CURRENT_SELECTION,257,208,114,14
+    EDITTEXT        IDC_EDIT_FUN_MODIFY_CURRENT_SELECTION,373,208,99,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "查询ID",IDC_BUTTON_FUN_QUERY_ID,257,246,114,14
+    EDITTEXT        IDC_EDIT_FUN_QUERY_ID,373,246,99,14,ES_AUTOHSCROLL | ES_NUMBER
+    PUSHBUTTON      "查询名称",IDC_BUTTON_FUN_QUERY_NAME,257,261,114,14
+    EDITTEXT        IDC_EDIT_FUN_QUERY_NAME,373,261,99,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "当前所选学生选当前所选课程",IDC_BUTTON_FUN_STUDENT_SELECTS_COURSE,257,283,114,14
+    PUSHBUTTON      "查询当前所选项",IDC_BUTTON_FUN_QUERY_CURRENT_SELECTION,257,232,114,14
+    EDITTEXT        IDC_EDIT_COURSE_LIST_PAGE_NUM,332,105,29,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_STUDENT_LIST_PAGE_NUM,88,283,29,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "退出程序",IDC_BUTTON_EXIT,414,312,60,16
+    GROUPBOX        "",IDC_STATIC,254,126,224,173
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_DIALOG_MAIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 478
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 440
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG_MAIN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // Chinese (Simplified) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
